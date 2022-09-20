@@ -56,7 +56,7 @@ def index():
         img = Image.fromarray(image_arr, 'RGB')
         img.save(os.path.join(app.config['INITIAL_FILE_UPLOADS'], name))
 
-        # writing code into a txt file named "extracted_text.txt"
+        # writing text into a txt file named "extracted_text.txt"
         with open('extracted_text.txt', 'w') as f:
             f.write('\n'.join(map(str, new_string)))
         f.close()
