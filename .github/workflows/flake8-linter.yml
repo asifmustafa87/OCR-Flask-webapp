@@ -1,0 +1,23 @@
+name: flake8-Linter
+on:
+  push:
+  pull_request:
+    branches: [master, main]
+
+
+jobs:
+  flake8-Linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install requirements
+        run: pip install flake8 pycodestyle
+      - name: Check syntax
+        # Stop the build if there are Python syntax errors or undefined names
+        run: flake8 --count --statistics --show-source
+
+      - name: Warnings
+        run: flake8 . --count --select=B,C,E,F,W,T4,B9,E9,F63,F7,F82 --exit-zero --max-complexity=10 --max-line-length=127 --statistics --show-source --extend-exclude=""
